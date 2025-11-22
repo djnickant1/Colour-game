@@ -31,10 +31,10 @@ const App = () => {
       // --- IMPROVED VOICE SEARCH LOGIC ---
       
       // 1. Look for specific High-Quality Female IOS/Mac voices
-      // "Samantha" is the built-in high quality iOS voice.
+      // "Matilda" is the built-in high quality iOS voice.
       let bestVoice = availableVoices.find(voice => 
-        voice.name === 'Samantha' || 
-        voice.name === 'Samantha Enhanced' || 
+        voice.name === 'Matilda' || 
+        voice.name === 'Matilda Premium' || 
         voice.name === 'Ava' ||
         voice.name === 'Ava Premium'
       );

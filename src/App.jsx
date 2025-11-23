@@ -30,23 +30,31 @@ const App = () => {
 
       // --- IMPROVED VOICE SEARCH LOGIC ---
       
-      // 1. Look for specific High-Quality Female IOS/Mac voices
-      // "Matilda" is the built-in high quality iOS voice.
+      // 1. Look for Matilda (User Requested)
       let bestVoice = availableVoices.find(voice => 
-        voice.name === 'Matilda' || 
-        voice.name === 'Matilda Premium' || 
-        voice.name === 'Ava' ||
-        voice.name === 'Ava Premium'
+        voice.name === 'Matilda Premium' ||
+        voice.name === 'Matilda Enhanced' ||
+        voice.name === 'Matilda'
       );
 
-      // 2. If not found, look for Google/Android High Quality
+      // 2. If not found, look for Samantha/Ava (iOS High Quality)
+      if (!bestVoice) {
+        bestVoice = availableVoices.find(voice => 
+          voice.name === 'Samantha' || 
+          voice.name === 'Samantha Enhanced' || 
+          voice.name === 'Ava' ||
+          voice.name === 'Ava Premium'
+        );
+      }
+
+      // 3. If not found, look for Google/Android High Quality
       if (!bestVoice) {
         bestVoice = availableVoices.find(voice => 
           voice.name.includes('Google US English')
         );
       }
 
-      // 3. If not found, look for ANY voice marked "Enhanced", "Premium" or "Natural"
+      // 4. If not found, look for ANY voice marked "Enhanced", "Premium" or "Natural"
       if (!bestVoice) {
         bestVoice = availableVoices.find(voice => 
           (voice.name.includes('Enhanced') || 
@@ -56,7 +64,7 @@ const App = () => {
         );
       }
 
-      // 4. Fallback: Look for any female English voice
+      // 5. Fallback: Look for any female English voice
       if (!bestVoice) {
          bestVoice = availableVoices.find(voice => 
           (voice.name.includes('Female') || voice.name.includes('Victoria') || voice.name.includes('Susan')) && 
@@ -64,7 +72,7 @@ const App = () => {
         );
       }
 
-      // 5. Absolute Fallback: The first English voice available
+      // 6. Absolute Fallback: The first English voice available
       if (!bestVoice) {
         bestVoice = availableVoices.find(voice => voice.lang.startsWith('en'));
       }
@@ -173,7 +181,7 @@ const App = () => {
             ? "Audio Ready" 
             : "Loading voices..."}
         </p>
-        {/* This helps you verify if the iPad found Samantha */}
+        {/* This helps you verify if the iPad found Matilda */}
         <p className="text-xs text-gray-600 mt-4">
            Voice: {selectedVoice ? selectedVoice.name : 'Default'}
         </p>
@@ -189,7 +197,8 @@ const App = () => {
         </h2>
       </div>
 
-      <div className="flex-1 flex gap-4 p-4">
+      {/* Main Game Area - Increased GAP to gap-32 for massive separation */}
+      <div className="flex-1 flex gap-32 p-4">
         {options.map((color, index) => (
           <button
             key={index}
